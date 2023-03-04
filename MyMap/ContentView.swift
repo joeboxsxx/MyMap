@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var inputText: String = ""
+    
+    @State var displaySearchKey: String = ""
+    
     var body: some View {
         VStack {
-            MapView(searchKey: "羽田空港")
+            TextField("キーワード", text: $inputText, prompt: Text("キーワードを入力していください"))
+                .onSubmit {
+                    displaySearchKey = inputText
+                }
+                .padding()
+            
+            MapView(searchKey: displaySearchKey)
         }
     }
 }
